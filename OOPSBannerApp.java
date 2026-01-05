@@ -1,11 +1,26 @@
 /**
- * UC6: Banner using Functions
- * now we are using functions (methods) to generate the pattern of each letter.
+ * UC7: Banner using Inner Class
+ * Now it uses an Inner Class (CharacterPattern) to store each letter and its pattern.
  */
 public class OOPSBannerApp {
 
-    static String[] getOPattern() {
-        return new String[]{
+    static class CharacterPattern {
+        private final char character;
+        private final String[] pattern;
+
+        CharacterPattern(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        String[] getPattern() {
+            return pattern;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        CharacterPattern O = new CharacterPattern('O', new String[]{//Create Objects for Each Letter
             " ******** ",
             "*        *",
             "*        *",
@@ -13,11 +28,9 @@ public class OOPSBannerApp {
             "*        *",
             "*        *",
             " ******** "
-        };
-    }
+        });
 
-    static String[] getPPattern() {
-        return new String[]{
+        CharacterPattern P = new CharacterPattern('P', new String[]{
             " ******** ",
             "*        *",
             "*        *",
@@ -25,11 +38,9 @@ public class OOPSBannerApp {
             "*         ",
             "*         ",
             "*         "
-        };
-    }
+        });
 
-    static String[] getSPattern() {
-        return new String[]{
+        CharacterPattern S = new CharacterPattern('S', new String[]{
             " ******** ",
             "*         ",
             "*         ",
@@ -37,17 +48,14 @@ public class OOPSBannerApp {
             "         *",
             "         *",
             " ******** "
-        };
-    }
-
-    public static void main(String[] args) {
-
-        String[] o = getOPattern();//call back functions
-        String[] p = getPPattern();
-        String[] s = getSPattern();
+        });
 
         for (int i = 0; i < 7; i++) {
-            System.out.println(String.join(" ", o[i], o[i], p[i], s[i]));
+            System.out.println(String.join(" ",
+                    O.getPattern()[i],
+                    O.getPattern()[i],
+                    P.getPattern()[i],
+                    S.getPattern()[i]));
         }
     }
 }
