@@ -1,26 +1,17 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * UC7: Banner using Inner Class
- * Now it uses an Inner Class (CharacterPattern) to store each letter and its pattern.
+ * UC8: Banner using HashMap
+ *  here we are using the dynamic manner hashmap You can change the word easily without changing banner logic.
  */
 public class OOPSBannerApp {
 
-    static class CharacterPattern {
-        private final char character;
-        private final String[] pattern;
+    static Map<Character, String[]> getPatterns() {
 
-        CharacterPattern(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
+        Map<Character, String[]> map = new HashMap<>();
 
-        String[] getPattern() {
-            return pattern;
-        }
-    }
-
-    public static void main(String[] args) {
-
-        CharacterPattern O = new CharacterPattern('O', new String[]{//Create Objects for Each Letter
+        map.put('O', new String[]{//Stores each letter with its banner pattern
             " ******** ",
             "*        *",
             "*        *",
@@ -30,7 +21,7 @@ public class OOPSBannerApp {
             " ******** "
         });
 
-        CharacterPattern P = new CharacterPattern('P', new String[]{
+        map.put('P', new String[]{
             " ******** ",
             "*        *",
             "*        *",
@@ -40,7 +31,7 @@ public class OOPSBannerApp {
             "*         "
         });
 
-        CharacterPattern S = new CharacterPattern('S', new String[]{
+        map.put('S', new String[]{
             " ******** ",
             "*         ",
             "*         ",
@@ -50,12 +41,20 @@ public class OOPSBannerApp {
             " ******** "
         });
 
-        for (int i = 0; i < 7; i++) {
-            System.out.println(String.join(" ",
-                    O.getPattern()[i],
-                    O.getPattern()[i],
-                    P.getPattern()[i],
-                    S.getPattern()[i]));
+        return map;
+    }
+
+    public static void main(String[] args) {
+
+        Map<Character, String[]> patterns = getPatterns();
+        String word = "OOPS";
+
+        for (int row = 0; row < 7; row++) {
+            StringBuilder line = new StringBuilder();
+            for (char ch : word.toCharArray()) {
+                line.append(patterns.get(ch)[row]).append(" ");
+            }
+            System.out.println(line);
         }
     }
 }
